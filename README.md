@@ -4,6 +4,9 @@ Jive SBS Plugin: Script Console
 Run your scripts in Jive SBS administration console.
 Scripts can access JiveContext (Spring context) and is very powerful tool.
 
+Just go to Jive Admin > System > Management > Scripting Console and run your script.
+Script itself is executed in separate thread so you need to refresh to get actual script's output.
+
 
 How to write a script
 ---------------------
