@@ -30,76 +30,75 @@ import javax.script.ScriptEngineManager;
 
 /**
  * @author Libor Krzyzanek (lkrzyzan)
- * 
  */
 public class ScriptManagerImpl implements ScriptManager {
 
-  private String language = "JavaScript";
+	private String language = "JavaScript";
 
-  private String script = "importPackage(java.lang);\n"
-      + "importPackage(java.lang.util);\n"
-      + "importPackage(com.jivesoftware.community);\n\n"
-      + "/* Run the script. ctx is com.jivesoftware.community.JiveContext class (spring context), out is PrintWriter */\n"
-      + "function run(ctx, out) {\n" + "  out.append(\"DONE\");\n" + "}";
+	private String script = "importPackage(java.lang);\n"
+			+ "importPackage(java.lang.util);\n"
+			+ "importPackage(com.jivesoftware.community);\n\n"
+			+ "/* Run the script. ctx is com.jivesoftware.community.JiveContext class (spring context), out is PrintWriter */\n"
+			+ "function run(ctx, out) {\n" + "  out.append(\"DONE\");\n" + "}";
 
-  private ScriptEngineManager scriptEngineMgr;
+	private ScriptEngineManager scriptEngineMgr;
 
-  private List<String> languages;
+	private List<String> languages;
 
-  private ScriptExecutor executor = null;
+	private ScriptExecutor executor = null;
 
-  public ScriptManagerImpl() {
-    this.scriptEngineMgr = new ScriptEngineManager();
+	public ScriptManagerImpl() {
+		this.scriptEngineMgr = new ScriptEngineManager();
 
-    this.languages = new ArrayList<String>();
+		this.languages = new ArrayList<String>();
 
-    List<ScriptEngineFactory> factories = scriptEngineMgr.getEngineFactories();
+		List<ScriptEngineFactory> factories = scriptEngineMgr.getEngineFactories();
 
-    for (int i = 0; i < factories.size(); i++) {
-      ScriptEngineFactory factory = factories.get(i);
-      languages.addAll(factory.getNames());
-    }
-  }
+		for (int i = 0; i < factories.size(); i++) {
+			ScriptEngineFactory factory = factories.get(i);
+			languages.addAll(factory.getNames());
+		}
+	}
 
-  @Override
-  public void execute(String script, String language) {
-    this.language = language;
-    this.script = script;
+	@Override
+	public void execute(String script, String language) {
+		this.language = language;
+		this.script = script;
 
-    ScriptEngine engine = scriptEngineMgr.getEngineByName(language);
-    executor = new ScriptExecutor(script, engine);
-    executor.start();
-  }
+		ScriptEngine engine = scriptEngineMgr.getEngineByName(language);
+		executor = new ScriptExecutor(script, engine);
+		executor.start();
+	}
 
-  @Override
-  public boolean isRunning() {
-    if (executor == null) {
-      return false;
-    }
-    return executor.isRunning();
-  }
+	@Override
+	public boolean isRunning() {
+		if (executor == null) {
+			return false;
+		}
+		return executor.isRunning();
+	}
 
-  @Override
-  public String getScript() {
-    return script;
-  }
+	@Override
+	public String getScript() {
+		return script;
+	}
 
-  @Override
-  public String getLanguage() {
-    return language;
-  }
+	@Override
+	public String getLanguage() {
+		return language;
+	}
 
-  @Override
-  public String getResult() {
-    if (executor == null) {
-      return "Insert script content, choose scripting language and then press the Execute button";
-    }
-    return executor.getResult();
-  }
+	@Override
+	public String getResult() {
+		if (executor == null) {
+			return "Insert script content, choose scripting language and then press the Execute button";
+		}
+		return executor.getResult();
+	}
 
-  @Override
-  public List<String> getLanguages() {
-    return languages;
-  }
+	@Override
+	public List<String> getLanguages() {
+		return languages;
+	}
 
 }

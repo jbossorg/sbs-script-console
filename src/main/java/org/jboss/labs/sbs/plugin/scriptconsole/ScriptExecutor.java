@@ -34,65 +34,64 @@ import com.jivesoftware.community.lifecycle.JiveApplication;
 
 /**
  * Executor for admin console.
- * 
+ *
  * @author Libor Krzyzanek (lkrzyzan)
- * 
  */
 public class ScriptExecutor extends Thread {
 
-  private static final Logger log = Logger.getLogger(ScriptExecutor.class);
+	private static final Logger log = Logger.getLogger(ScriptExecutor.class);
 
-  private boolean running = false;
+	private boolean running = false;
 
-  private String script;
+	private String script;
 
-  private StringWriter result = new StringWriter();
+	private StringWriter result = new StringWriter();
 
-  private ScriptEngine engine;
+	private ScriptEngine engine;
 
-  public ScriptExecutor(String script, ScriptEngine engine) {
-    super("ScriptingConsole-Executor");
-    this.script = script;
-    this.engine = engine;
-  }
+	public ScriptExecutor(String script, ScriptEngine engine) {
+		super("ScriptingConsole-Executor");
+		this.script = script;
+		this.engine = engine;
+	}
 
-  @Override
-  public void run() {
-    running = true;
-    PrintWriter r = new PrintWriter(result, true);
+	@Override
+	public void run() {
+		running = true;
+		PrintWriter r = new PrintWriter(result, true);
 
-    try {
-      engine.eval(script);
-      Invocable invocableEngine = (Invocable) engine;
-      Object output = invocableEngine.invokeFunction("run", JiveApplication.getContext(), r);
-      if (output != null) {
-        r.println("Output from script:");
-        r.print(output.toString());
-      }
-    } catch (ScriptException e) {
-      e.printStackTrace(r);
-      log.error("Exception occured during script execution", e);
-    } catch (NoSuchMethodException e) {
-      e.printStackTrace(r);
-      log.error("Exception occured during script execution", e);
-    }
+		try {
+			engine.eval(script);
+			Invocable invocableEngine = (Invocable) engine;
+			Object output = invocableEngine.invokeFunction("run", JiveApplication.getContext(), r);
+			if (output != null) {
+				r.println("Output from script:");
+				r.print(output.toString());
+			}
+		} catch (ScriptException e) {
+			e.printStackTrace(r);
+			log.error("Exception occured during script execution", e);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace(r);
+			log.error("Exception occured during script execution", e);
+		}
 
-    r.close();
+		r.close();
 
-    running = false;
-  }
+		running = false;
+	}
 
-  public boolean isRunning() {
-    return running;
-  }
+	public boolean isRunning() {
+		return running;
+	}
 
-  /**
-   * Get current value of result
-   * 
-   * @return
-   */
-  public String getResult() {
-    return result.toString();
-  }
+	/**
+	 * Get current value of result
+	 *
+	 * @return
+	 */
+	public String getResult() {
+		return result.toString();
+	}
 
 }

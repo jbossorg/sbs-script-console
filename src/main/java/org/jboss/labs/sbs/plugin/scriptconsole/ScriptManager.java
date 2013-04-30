@@ -25,51 +25,50 @@ import java.util.List;
 
 /**
  * @author Libor Krzyzanek (lkrzyzan)
- * 
  */
 public interface ScriptManager {
 
-  /**
-   * Execute script
-   * 
-   * @param script
-   * @param language
-   */
-  public void execute(String script, String language);
+	/**
+	 * Execute script
+	 *
+	 * @param script
+	 * @param language
+	 */
+	public void execute(String script, String language);
 
-  /**
-   * Check if script is still running
-   * 
-   * @return
-   */
-  public boolean isRunning();
+	/**
+	 * Check if script is still running
+	 *
+	 * @return
+	 */
+	public boolean isRunning();
 
-  /**
-   * Get actual script content
-   * 
-   * @return
-   */
-  public String getScript();
+	/**
+	 * Get actual script content
+	 *
+	 * @return
+	 */
+	public String getScript();
 
-  /**
-   * Get Language of current script
-   * 
-   * @return
-   */
-  public String getLanguage();
+	/**
+	 * Get Language of current script
+	 *
+	 * @return
+	 */
+	public String getLanguage();
 
-  /**
-   * Get result of last script execution
-   * 
-   * @return
-   */
-  public String getResult();
+	/**
+	 * Get result of last script execution
+	 *
+	 * @return
+	 */
+	public String getResult();
 
-  /**
-   * Get available languages
-   * 
-   * @return
-   */
-  public List<String> getLanguages();
+	/**
+	 * Get available languages
+	 *
+	 * @return
+	 */
+	public List<String> getLanguages();
 
 }

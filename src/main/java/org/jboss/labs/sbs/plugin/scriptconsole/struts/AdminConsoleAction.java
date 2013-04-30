@@ -36,66 +36,66 @@ import com.opensymphony.xwork2.validator.annotations.Validation;
 @Validation
 public class AdminConsoleAction extends JiveActionSupport implements Preparable {
 
-  private static final long serialVersionUID = -7477924670457819035L;
+	private static final long serialVersionUID = -7477924670457819035L;
 
-  private String scriptLanguage;
+	private String scriptLanguage;
 
-  private String scriptContent;
+	private String scriptContent;
 
-  private ScriptManager scriptManager;
+	private ScriptManager scriptManager;
 
-  @Override
-  public void prepare() throws Exception {
-    scriptLanguage = scriptManager.getLanguage();
-    scriptContent = scriptManager.getScript();
-  }
+	@Override
+	public void prepare() throws Exception {
+		scriptLanguage = scriptManager.getLanguage();
+		scriptContent = scriptManager.getScript();
+	}
 
-  @Override
-  public String execute() {
-    if (scriptManager.isRunning()) {
-      addActionError(getText("plugin.script-console.admin.console.text.error.alreadyRunning"));
-      return INPUT;
-    }
+	@Override
+	public String execute() {
+		if (scriptManager.isRunning()) {
+			addActionError(getText("plugin.script-console.admin.console.text.error.alreadyRunning"));
+			return INPUT;
+		}
 
-    scriptManager.execute(scriptContent, scriptLanguage);
+		scriptManager.execute(scriptContent, scriptLanguage);
 
-    addActionMessage(getText("plugin.script-console.admin.console.text.sucess"));
+		addActionMessage(getText("plugin.script-console.admin.console.text.sucess"));
 
-    return SUCCESS;
-  }
+		return SUCCESS;
+	}
 
-  public String getResult() {
-    return scriptManager.getResult();
-  }
+	public String getResult() {
+		return scriptManager.getResult();
+	}
 
-  @RequiredStringValidator(message = "Choose scripting language")
-  public void setScriptLanguage(String scriptLanguage) {
-    this.scriptLanguage = scriptLanguage;
-  }
+	@RequiredStringValidator(message = "Choose scripting language")
+	public void setScriptLanguage(String scriptLanguage) {
+		this.scriptLanguage = scriptLanguage;
+	}
 
-  public String getScriptLanguage() {
-    return scriptLanguage;
-  }
+	public String getScriptLanguage() {
+		return scriptLanguage;
+	}
 
-  @RequiredStringValidator(message = "Script content is empty")
-  public void setScriptContent(String scriptContent) {
-    this.scriptContent = scriptContent;
-  }
+	@RequiredStringValidator(message = "Script content is empty")
+	public void setScriptContent(String scriptContent) {
+		this.scriptContent = scriptContent;
+	}
 
-  public String getScriptContent() {
-    return scriptContent;
-  }
+	public String getScriptContent() {
+		return scriptContent;
+	}
 
-  public List<String> getLanguages() {
-    return scriptManager.getLanguages();
-  }
+	public List<String> getLanguages() {
+		return scriptManager.getLanguages();
+	}
 
-  public boolean isRunning() {
-    return scriptManager.isRunning();
-  }
+	public boolean isRunning() {
+		return scriptManager.isRunning();
+	}
 
-  public void setScriptManager(ScriptManager scriptManager) {
-    this.scriptManager = scriptManager;
-  }
+	public void setScriptManager(ScriptManager scriptManager) {
+		this.scriptManager = scriptManager;
+	}
 
 }
