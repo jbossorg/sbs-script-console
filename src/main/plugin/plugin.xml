@@ -1,10 +1,13 @@
 <plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:noNamespaceSchemaLocation="http://www.jivesoftware.com/schemas/clearspace/1_1/plugin.xsd">
-	<name>script-console</name>
-	<description>Run your scripts in Jive SBS administration console</description>
-	<author>Red Hat</author>
-	<version>1.1.0</version>
-	<minServerVersion>4.0.0</minServerVersion>
+	<name>${project.artifactId}</name>
+	<description>${project.description}</description>
+	<author>${project.developers[0].name}</author>
+	<authorURL>${project.developers[0].url}</authorURL>
+	<pluginURL>${project.url}</pluginURL>
+	<version>${project.version}</version>
+	<minServerVersion>${sbs.min.version}</minServerVersion>
+	<maxServerVersion>${sbs.max.version}</maxServerVersion>
 
 	<components>
 		<component id="admin-console">

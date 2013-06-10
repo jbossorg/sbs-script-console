@@ -2,10 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jboss.labs.sbs.plugin</groupId>
+	<groupId>org.jboss.sbs</groupId>
 	<artifactId>script-console</artifactId>
 	<name>script-console</name>
-	<version>1.1.0</version>
+	<description>Run your scripts in Jive SBS administration console</description>
+	<url>https://github.com/jbossorg/sbs-script-console</url>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 
 	<inceptionYear>2011</inceptionYear>
@@ -41,6 +43,8 @@
 
 	<properties>
 		<sbs.version>4.5.6.0</sbs.version>
+		<sbs.min.version>4.5.0.0</sbs.min.version>
+		<sbs.max.version>7.0.0.0</sbs.max.version>
 		<java.version>1.6</java.version>
 		<final.name>${project.artifactId}-${project.version}-${sbs.version}</final.name>
 	</properties>
