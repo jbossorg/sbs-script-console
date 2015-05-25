@@ -45,7 +45,7 @@ Access DB
 		function run(ctx, result) {
 			SEPARATOR = ";";
 
-			dataSourceFactory = ctx.getBean("dataSourceFactory");
+			dataSourceFactory = ctx.getBean(com.jivesoftware.base.database.dao.DataSourceFactory);
             jdbcTemplate = new JdbcTemplate(dataSourceFactory.dataSource);
 
 			data = jdbcTemplate.queryForList("select 1 + 1 'Value of 1+1'");
