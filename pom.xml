@@ -7,12 +7,12 @@
 	<name>script-console</name>
 	<description>Run your scripts in Jive SBS administration console</description>
 	<url>https://github.com/jbossorg/sbs-script-console</url>
-	<version>7.0.0</version>
+	<version>8.0.0</version>
 
 	<parent>
 		<groupId>com.jivesoftware.maven</groupId>
 		<artifactId>jive-parent-pom</artifactId>
-		<version>7.0.3.1-0</version>
+		<version>8.0.4.0-3</version>
 	</parent>
 
 	<inceptionYear>2011</inceptionYear>
@@ -98,7 +98,7 @@
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+			<artifactId>${servlet.api.artifactId}</artifactId>
 		</dependency>
 	</dependencies>
 

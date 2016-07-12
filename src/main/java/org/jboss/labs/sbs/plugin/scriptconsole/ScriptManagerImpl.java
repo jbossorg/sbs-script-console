@@ -35,10 +35,8 @@ public class ScriptManagerImpl implements ScriptManager {
 
 	private String language = "JavaScript";
 
-	private String script = "importPackage(java.lang);\n"
-			+ "importPackage(java.lang.util);\n"
-			+ "importPackage(com.jivesoftware.community);\n\n"
-			+ "/* Run the script. ctx is com.jivesoftware.community.JiveContext class (spring context), out is PrintWriter */\n"
+	private String script =
+			"/* Run the script. ctx is com.jivesoftware.community.JiveContext class (spring context), out is PrintWriter */\n"
 			+ "function run(ctx, out) {\n" + "  out.append(\"DONE\");\n" + "}";
 
 	private ScriptEngineManager scriptEngineMgr;
@@ -50,7 +48,7 @@ public class ScriptManagerImpl implements ScriptManager {
 	public ScriptManagerImpl() {
 		this.scriptEngineMgr = new ScriptEngineManager();
 
-		this.languages = new ArrayList<String>();
+		this.languages = new ArrayList<>();
 
 		List<ScriptEngineFactory> factories = scriptEngineMgr.getEngineFactories();
 

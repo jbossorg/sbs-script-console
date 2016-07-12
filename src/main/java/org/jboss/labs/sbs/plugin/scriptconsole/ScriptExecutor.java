@@ -26,7 +26,6 @@ import java.io.StringWriter;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
-import javax.script.ScriptException;
 
 import org.apache.log4j.Logger;
 
@@ -58,27 +57,24 @@ public class ScriptExecutor extends Thread {
 	@Override
 	public void run() {
 		running = true;
-		PrintWriter r = new PrintWriter(result, true);
 
-		try {
-			engine.eval(script);
-			Invocable invocableEngine = (Invocable) engine;
-			Object output = invocableEngine.invokeFunction("run", JiveApplication.getContext(), r);
-			if (output != null) {
-				r.println("Output from script:");
-				r.print(output.toString());
+		try (PrintWriter r = new PrintWriter(result, true)) {
+			try {
+				engine.eval(script);
+				Invocable invocableEngine = (Invocable) engine;
+				Object output = invocableEngine.invokeFunction("run", JiveApplication.getContext(), r);
+				if (output != null) {
+					r.println("Output from script:");
+					r.print(output.toString());
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace(r);
+				log.error("Exception occurred during script execution", e);
 			}
-		} catch (ScriptException e) {
-			e.printStackTrace(r);
-			log.error("Exception occured during script execution", e);
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace(r);
-			log.error("Exception occured during script execution", e);
+		} finally {
+			running = false;
 		}
-
-		r.close();
-
-		running = false;
 	}
 
 	public boolean isRunning() {

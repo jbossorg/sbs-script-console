@@ -20,9 +20,6 @@ Examples
 
 Simple output
 
-		importPackage(java.lang);
-		importPackage(com.jivesoftware.community);
-
 		/* Run the script.
 		   ctx is com.jivesoftware.community.JiveContext class (spring context)
 		   result is java.io.PrintWriter */
@@ -35,40 +32,39 @@ Simple output
 
 Access DB
 
-		importPackage(java.lang);
-        importPackage(com.jivesoftware.community);
-        importPackage(org.springframework.jdbc.core);
+        var Collections = new JavaImporter(
+            java.util,
+            org.springframework.jdbc.core);
 
-		/* Run the script.
-		   ctx is com.jivesoftware.community.JiveContext class (spring context)
-		   result is java.io.PrintWriter */
-		function run(ctx, result) {
-			SEPARATOR = ";";
+        /* Run the script.
+           ctx is com.jivesoftware.community.JiveContext class (spring context)
+           result is java.io.PrintWriter */
+        function run(ctx, result) {
+            SEPARATOR = ";";
 
-			dataSourceFactory = ctx.getBean(com.jivesoftware.base.database.dao.DataSourceFactory);
-            jdbcTemplate = new JdbcTemplate(dataSourceFactory.dataSource);
+            with (Collections) {
+                dataSourceFactory = ctx.getBean(com.jivesoftware.base.database.dao.DataSourceFactory.class);
+                jdbcTemplate = new JdbcTemplate(dataSourceFactory.dataSource);
 
-			data = jdbcTemplate.queryForList("select 1 + 1 'Value of 1+1'");
+                data = jdbcTemplate.queryForList("select 1 + 1 'Value of 1+1'");
 
-			result.println("Result form SQL query:");
+                result.println("Result form SQL query:");
 
-			//column names
-			if (data.size() > 0) {
-				headerrow = data.get(0)
-				for(j = 0; j < headerrow.size(); j++) {
-				column = headerrow.get(j);
-				result.print(column + SEPARATOR);
-				}
-				result.println("");
-			}
+                line = data.get(0).keySet().iterator();
+                while(line.hasNext()) {
+                    column = line.next();
+                    result.append(column + SEPARATOR);
+                }
+                result.append("\n");
 
+                for (i = 0; i < data.size(); i++) {
+                    line = data.get(i).values().iterator();
+                    while(line.hasNext()) {
+                        column = line.next();
+                        result.append(column + SEPARATOR);
+                    }
+                    result.append("\n");
+                }
+            }
+        }
 
-			for (i = 0; i < data.size(); i++) {
-				line = data.get(i);
-				for(j = 0; j < line.size(); j++) {
-					column = line.getValue(j);
-					result.print(column + SEPARATOR);
-				}
-				result.println("");
-			}
-		}

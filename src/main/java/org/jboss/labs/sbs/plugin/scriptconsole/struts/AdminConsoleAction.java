@@ -28,12 +28,10 @@ import org.jboss.labs.sbs.plugin.scriptconsole.ScriptManager;
 import com.jivesoftware.community.action.JiveActionSupport;
 import com.opensymphony.xwork2.Preparable;
 import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
-import com.opensymphony.xwork2.validator.annotations.Validation;
 
 /**
  * Main class for scripting console
  */
-@Validation
 public class AdminConsoleAction extends JiveActionSupport implements Preparable {
 
 	private static final long serialVersionUID = -7477924670457819035L;
